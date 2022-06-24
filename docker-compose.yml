@@ -1,0 +1,37 @@
+version: '3.1'
+
+services:
+  app:
+    container_name: springboot-postgresql
+    image: springboot-postgresql
+    build: .
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+    ports:
+      - "80:8080"
+    restart: always
+    depends_on:
+      - yandexshop
+    networks: ['yandexshopnetworks']
+    security_opt:
+      - seccomp:unconfined
+
+  yandexshop:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_VOLUME: ${POSTGRES_VOLUME}
+    volumes:
+      - ${POSTGRES_VOLUME}
+    ports:
+      - "5432:5432"
+    networks: ['yandexshopnetworks']
+    restart: always
+    security_opt:
+      - seccomp:unconfined
+
+
+networks: {yandexshopnetworks: {}}
+

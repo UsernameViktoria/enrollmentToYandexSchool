@@ -1,0 +1,47 @@
+
+spring:
+  datasource:
+      url: jdbc:postgresql://yandexshop:5432/yandex?useSSL=false&useUnicode=true&serverTimezone=UTC
+      username: postgres
+      password: password
+      driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+
+server:
+  port: 8080
+  address: app
+
+
+
+
+info:
+  name: Spring Data Rest
+  description: This application is intended for the enrollment of ViKtoria Zatsepina to the Yandex backend development school :)
+
+management:
+  endpoint:
+    info:
+      enabled: true
+    health:
+      enabled: true
+    mappings:
+      enabled: true
+    shutdown:
+      enabled: true
+
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+#endpoints:
+#  shutdown:
+#    enabled: true
